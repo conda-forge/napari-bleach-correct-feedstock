@@ -6,23 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-bleach-correct-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-bleach-correct-{{ version }}.tar.gz
   sha256: 6f027173992b0607c52eac87e2074a3d407a447076052896e7e738db44f3f46a
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - magicgui
     - numpy
     - pyqtgraph
-    - python >=3.8
+    - python >={{ python_min }}
     - qtpy
     - scikit-image
     - scipy
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/marx-alex/napari-bleach-correct
